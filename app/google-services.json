@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "161579873465",
+    "project_id": "bind-64b27",
+    "storage_bucket": "bind-64b27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161579873465:android:02278a85d5c659f79c9768",
+        "android_client_info": {
+          "package_name": "com.tuwaiq.bind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161579873465-0ipqfbn0qpurohnsjpdh04d4srglobbe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCax2axsFiVqABbXLg8doJd6AYEoyxiQik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161579873465-0ipqfbn0qpurohnsjpdh04d4srglobbe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

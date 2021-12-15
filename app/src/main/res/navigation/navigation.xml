@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.tuwaiq.bind.app.auth.SplashFragment"
+        android:label="splash_fragment"
+        tools:layout="@layout/splash_fragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.tuwaiq.bind.app.auth.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_feedsFragment"
+            app:destination="@id/feedsFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.tuwaiq.bind.app.auth.SignUpFragment"
+        android:label="sign_up_fragment"
+        tools:layout="@layout/sign_up_fragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_feedsFragment"
+            app:destination="@id/feedsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedsFragment"
+        android:name="com.tuwaiq.bind.app.feeds.FeedsFragment"
+        android:label="feeds_fragment"
+        tools:layout="@layout/feeds_fragment" >
+        <action
+            android:id="@+id/action_feedsFragment_to_addPostFragment2"
+            app:destination="@id/addPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPostFragment"
+        android:name="com.tuwaiq.bind.app.feeds.AddPostFragment"
+        android:label="add_post_fragment"
+        tools:layout="@layout/add_post_fragment" >
+        <action
+            android:id="@+id/action_addPostFragment_to_feedsFragment"
+            app:destination="@id/feedsFragment" />
+    </fragment>
+</navigation>

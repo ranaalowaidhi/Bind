@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Bottom 2dp Shadow -->
+    <item>
+        <shape>
+
+            <solid android:color="#d8d8d8" />
+
+        </shape>
+    </item>
+
+    <!-- White Top color -->
+    <item android:bottom="20px">
+
+        <shape>
+
+            <solid android:color="#FFFFFF" />
+            <size android:height="45sp"
+                android:width="300sp"/>
+
+
+        </shape>
+
+    </item>
+
+
+</layer-list>
