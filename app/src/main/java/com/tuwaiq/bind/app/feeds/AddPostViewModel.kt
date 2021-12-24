@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tuwaiq.bind.data.remote.PostData
-import com.tuwaiq.bind.data.repos.LocationRepoImpl
+import com.tuwaiq.bind.data.remote.PostDataDto
+import com.tuwaiq.bind.domain.models.PostData
 import com.tuwaiq.bind.domain.use_cases.feeds_use_cases.AddPostUseCase
 import com.tuwaiq.bind.domain.use_cases.feeds_use_cases.GetLocationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,8 +25,8 @@ class AddPostViewModel @Inject constructor(
             addPostUseCase(postData)
         }
     }
-    lateinit var userLocation:Location
 
+    lateinit var userLocation:Location
     fun getLocation(): LiveData<Location> {
         val locationLiveData:MutableLiveData<Location> = MutableLiveData()
         viewModelScope.launch {
@@ -38,5 +38,4 @@ class AddPostViewModel @Inject constructor(
         }
         return locationLiveData
     }
-
 }

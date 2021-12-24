@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.tuwaiq.bind.R
-import com.tuwaiq.bind.data.remote.PostData
+import com.tuwaiq.bind.data.remote.PostDataDto
 import com.tuwaiq.bind.databinding.AddPostFragmentBinding
+import com.tuwaiq.bind.domain.models.PostData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,8 +37,13 @@ class AddPostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = AddPostFragmentBinding.inflate(layoutInflater)
+
         binding.addPostBtn.setOnClickListener {
-            val post = PostData("12345","hello,world","empty","1 hours ago",userLocation)
+            val postLat = userLocation.latitude.toString()
+            val postLan = userLocation.longitude.toString()
+            val postOwner = Firebase.auth.currentUser?.uid.toString()
+            val post = PostData(postOwner,"hello,world","empty",
+                "1 hours ago",postLat,postLan)
             viewModel.addPost(post)
             findNavController().navigate(R.id.action_addPostFragment_to_feedsFragment)
         }

@@ -63,7 +63,6 @@
             android:hint="@string/what_s_in_your_mind"
             android:textColor="@color/gray_400"
             android:textSize="14sp"
-            app:backgroundTint="@color/blue_700"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

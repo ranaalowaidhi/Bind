@@ -9,7 +9,11 @@
     <string name="username">Username</string>
     <string name="bind_in_your_circle">Bind in your circle</string>
     <string name="add_new_post">Add new post</string>
-    <string name="what_s_in_your_mind">What\'s in your mind?...</string>
+    <string name="what_s_in_your_mind">What\'s in your mind…?</string>
     <string name="save">Save</string>
     <string name="add">Add</string>
+    <string name="home">Home</string>
+    <string name="map">Map</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
 </resources>
