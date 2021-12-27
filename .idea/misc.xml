@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable/add_img_shape.xml" value="0.25462962962962965" />
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.26256410256410256" />
         <entry key="app/src/main/res/drawable/card_bg.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.26256410256410256" />
         <entry key="app/src/main/res/drawable/ic_button.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_camera.xml" value="0.25462962962962965" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.26666666666666666" />
@@ -15,17 +16,19 @@
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/drawable/ic_sunny.xml" value="0.2601851851851852" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15664679202973864" />
+        <entry key="app/src/main/res/layout/activity_fragment_sample.xml" value="0.23645833333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/add_post_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/feed_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/feeds_fragment.xml" value="0.23645833333333333" />
+        <entry key="app/src/main/res/layout/fragment_results.xml" value="0.1" />
         <entry key="app/src/main/res/layout/login_fragment.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/map_fragment.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/profile_fragment.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/settings_fragment.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/sign_up_fragment.xml" value="0.25052083333333336" />
-        <entry key="app/src/main/res/layout/splash_fragment.xml" value="0.165" />
-        <entry key="app/src/main/res/menu/nav_menu.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/splash_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/nav_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

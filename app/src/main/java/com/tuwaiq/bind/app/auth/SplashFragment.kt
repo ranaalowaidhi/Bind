@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tuwaiq.bind.R
 import com.tuwaiq.bind.databinding.SplashFragmentBinding
 

@@ -33,7 +33,6 @@ class SignUpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = SignUpFragmentBinding.inflate(layoutInflater)
 
         binding.signupBtn.setOnClickListener {

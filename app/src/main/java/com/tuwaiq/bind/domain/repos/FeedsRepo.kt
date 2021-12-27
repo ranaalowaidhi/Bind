@@ -8,5 +8,4 @@ interface FeedsRepo {
 
     suspend fun getPost(userLat:Double,userLon:Double):List<PostData>
 
-
 }

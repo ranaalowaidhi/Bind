@@ -27,7 +27,7 @@ class FeedsRepoImpl @Inject constructor(
 
     @SuppressLint("MissingPermission")
     override suspend fun getPost(userLat:Double,userLon:Double) : List<PostData> {
-        var postDataList:List<PostDataDto> = mutableListOf()
+        val postDataList: MutableList<PostDataDto> = mutableListOf()
         val snapshot = postCollectionRef.get().await()
         for (document in snapshot) {
             val postLat: Double = document["postLat"].toString().toDouble()

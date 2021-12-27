@@ -49,6 +49,15 @@
         <action
             android:id="@+id/action_feedsFragment_to_addPostFragment2"
             app:destination="@id/addPostFragment" />
+        <action
+            android:id="@+id/action_feedsFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_feedsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_feedsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
@@ -58,5 +67,28 @@
         <action
             android:id="@+id/action_addPostFragment_to_feedsFragment"
             app:destination="@id/feedsFragment" />
+        <action
+            android:id="@+id/action_addPostFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.tuwaiq.bind.app.map.MapFragment"
+        android:label="map_fragment"
+        tools:layout="@layout/map_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.tuwaiq.bind.app.settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.tuwaiq.bind.app.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.tuwaiq.bind.app.feeds.ResultsFragment"
+        android:label="fragment_results"
+        tools:layout="@layout/fragment_results" />
 </navigation>

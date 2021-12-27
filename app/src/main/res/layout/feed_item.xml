@@ -80,7 +80,7 @@
             android:layout_marginEnd="20sp"
             android:fontFamily="@font/poppins"
             android:text="my current vibes"
-            android:textColor="@color/gray_400"
+            android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

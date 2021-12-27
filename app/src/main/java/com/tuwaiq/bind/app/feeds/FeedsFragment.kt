@@ -52,10 +52,6 @@ class FeedsFragment : Fragment() {
     ): View? {
         binding = FeedsFragmentBinding.inflate(layoutInflater)
         binding.postRv.layoutManager = LinearLayoutManager(context)
-        binding.addNewPostBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_feedsFragment_to_addPostFragment2)
-        }
-
         return binding.root
     }
 

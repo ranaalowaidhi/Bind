@@ -32,6 +32,7 @@
         android:fontFamily="@font/poppins_medium"
         android:text="@string/sign_up"
         android:textAllCaps="false"
+        app:backgroundTint="@color/white"
         android:textColor="@color/blue_700"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/goLoginBtn"
