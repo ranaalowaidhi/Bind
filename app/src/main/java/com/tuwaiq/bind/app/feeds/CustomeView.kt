@@ -27,17 +27,19 @@ fun fragmentBody(
         this.layoutParams = layoutParams
         addView(RecyclerView(context).apply {
             layoutManager = GridLayoutManager(context, 3)
-            setPadding(0, 100, 0, 0)
+            setPadding(0, 200, 0, 0)
             this.layoutParams = layoutParams
             this.adapter = adapter
         })
         addView(FloatingActionButton(context).apply {
+            backgroundTintList = ColorStateList.valueOf(Color.BLUE)
             this.layoutParams = FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             ).apply {
-                setMargins(32, 32, 32, 32)
-                this.gravity = Gravity.RIGHT or Gravity.BOTTOM
+                setMargins(100, 100, 100, 100)
+                this.gravity = Gravity.CENTER or Gravity.BOTTOM
+
             }
             imageTintList = ColorStateList.valueOf(Color.WHITE)
             setImageResource(R.drawable.ic_photo_camera)

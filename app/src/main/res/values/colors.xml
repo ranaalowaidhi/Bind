@@ -16,4 +16,12 @@
     <color name="red_200">#FE5F5F</color>
     <color name="blue_700">#395AFF</color>
     <color name="yellow_700">#FFD500</color>
+
+
+    <color name="video_counter_color_pix">#395AFF</color>
+    <color name="primary_color_pix">#395AFF</color>
+    <color name="primary_light_color_pix">#395AFF</color>
+    <color name="surface_color_pix">#ffffff</color>
+    <color name="text_color_pix">#807f7f</color>
+
 </resources>

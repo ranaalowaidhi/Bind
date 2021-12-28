@@ -8,15 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.tuwaiq.bind.R
 import io.ak1.pix.helpers.*
 import io.ak1.pix.models.Flash
 import io.ak1.pix.models.Mode
 import io.ak1.pix.models.Options
 import io.ak1.pix.models.Ratio
+import lv.chi.photopicker.PhotoPickerFragment
 
 private const val TAG = "FragmentSample"
-class FragmentSample : AppCompatActivity() {
+class FragmentSample : AppCompatActivity(){
 
     private val resultsFragment = ResultsFragment {
         showCameraFragment()
@@ -28,18 +30,33 @@ class FragmentSample : AppCompatActivity() {
         setupScreen()
         supportActionBar?.hide()
         showResultsFragment()
+//        openPicker()
     }
 
+//    override fun onImagesPicked(photos: ArrayList<Uri>) {
+//        val uri = Uri.parse(photos.joinToString(separator = "\n") { it.toString() })
+//        Log.e(TAG,"helloooo $uri")
+//    }
+//
+//    private fun openPicker() {
+//        PhotoPickerFragment.newInstance(
+//            multiple = true,
+//            allowCamera = true,
+//            maxSelection = 5,
+//            theme = R.style.ChiliPhotoPicker_Dark
+//        ).show(supportFragmentManager, "picker")
+//    }
+
     val options = Options().apply{
-        ratio = Ratio.RATIO_AUTO                                    //Image/video capture ratio
-        count = 5                                                   //Number of images to restrict selection count
-        spanCount = 3                                               //Number for columns in grid
-        path = "Bind/Camera"                                         //Custom Path For media Storage
-        isFrontFacing = false                                       //Front Facing camera on start
-        videoDurationLimitInSeconds = 10                            //Duration for video recording
-        mode = Mode.All                                             //Option to select only pictures or videos or both
-        flash = Flash.Auto                                          //Option to select flash type
-        preSelectedUrls = ArrayList<Uri>()                          //Pre selected Image Urls
+        ratio = Ratio.RATIO_AUTO
+        count = 5
+        spanCount = 3
+        path = "Pix/Camera"
+        isFrontFacing = false
+        videoDurationLimitInSeconds = 10
+        mode = Mode.All
+        flash = Flash.Auto
+        preSelectedUrls = ArrayList<Uri>()
     }
 
     private fun showCameraFragment() {
@@ -54,6 +71,7 @@ class FragmentSample : AppCompatActivity() {
                 }
                 PixEventCallback.Status.BACK_PRESSED -> {
                     supportFragmentManager.popBackStack()
+
                 }
             }
 
@@ -61,7 +79,6 @@ class FragmentSample : AppCompatActivity() {
     }
 
     private fun showResultsFragment() {
-        showStatusBar()
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, resultsFragment).commit()
     }
@@ -72,6 +89,7 @@ class FragmentSample : AppCompatActivity() {
             super.onBackPressed()
         else
             PixBus.onBackPressedEvent()
+        Log.e(TAG , "back pressed")
     }
 
 }

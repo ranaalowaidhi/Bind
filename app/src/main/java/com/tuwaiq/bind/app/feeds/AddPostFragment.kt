@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -40,6 +41,7 @@ import io.ak1.pix.models.Options
 import io.ak1.pix.models.Ratio
 import io.ak1.pix.utility.WIDTH
 import lv.chi.photopicker.ChiliPhotoPicker
+import lv.chi.photopicker.PhotoPickerFragment
 
 private const val TAG = "AddPostFragment"
 @AndroidEntryPoint
@@ -84,8 +86,6 @@ class AddPostFragment : Fragment(){
 
         return binding.root
     }
-
-
 
 }
 
