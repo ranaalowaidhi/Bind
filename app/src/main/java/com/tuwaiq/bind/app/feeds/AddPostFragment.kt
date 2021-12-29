@@ -1,57 +1,56 @@
 package com.tuwaiq.bind.app.feeds
 
+
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.location.Location
 import android.net.Uri
+import android.nfc.Tag
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
+import android.text.format.DateUtils
 import android.util.Log
-import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.RelativeLayout
+import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.sandrios.sandriosCamera.internal.SandriosCamera
+import com.sandrios.sandriosCamera.internal.configuration.CameraConfiguration
+import com.sandrios.sandriosCamera.internal.ui.model.Media
 import com.tuwaiq.bind.R
+import com.tuwaiq.bind.app.MainActivity
 import com.tuwaiq.bind.databinding.AddPostFragmentBinding
 import com.tuwaiq.bind.domain.models.PostData
 import dagger.hilt.android.AndroidEntryPoint
-import io.ak1.pix.helpers.PixEventCallback
-import io.ak1.pix.helpers.addPixToActivity
-import io.ak1.pix.helpers.pixFragment
-import io.ak1.pix.models.Flash
-import io.ak1.pix.models.Mode
-import io.ak1.pix.models.Options
-import io.ak1.pix.models.Ratio
-import io.ak1.pix.utility.WIDTH
-import lv.chi.photopicker.ChiliPhotoPicker
-import lv.chi.photopicker.PhotoPickerFragment
+import java.io.File
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.log
 
+lateinit var uri:Uri
+var cameraClicked = false
 private const val TAG = "AddPostFragment"
 @AndroidEntryPoint
-class AddPostFragment : Fragment(){
+class AddPostFragment : Fragment() , MainActivity.CallBack{
+
+
 
     private  val viewModel: AddPostViewModel by viewModels()
     private lateinit var binding: AddPostFragmentBinding
     private lateinit var userLocation: Location
+    lateinit var cMedia:Media
+    lateinit var postDate:String
 
 
+
+
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getLocation().observe(
@@ -59,6 +58,7 @@ class AddPostFragment : Fragment(){
                 userLocation = it
             }
         )
+
     }
 
     override fun onCreateView(
@@ -66,26 +66,65 @@ class AddPostFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         binding = AddPostFragmentBinding.inflate(layoutInflater)
-
-
-        binding.addImgBtn.setOnClickListener{
-            startActivity(Intent(requireContext(), FragmentSample::class.java))
-        }
-
-
-
+        Log.e(TAG,"binding started")
         binding.addPostBtn.setOnClickListener {
+            val date = Date().toString()
             val postLat = userLocation.latitude.toString()
             val postLan = userLocation.longitude.toString()
             val postOwner = Firebase.auth.currentUser?.uid.toString()
-            val post = PostData(postOwner,"hello,world","empty",
-                "1 hours ago",postLat,postLan)
+            val postText = binding.postTv.text.toString()
+            val username:String = "Rana Alowaidhi"
+            val photoId:UUID = UUID.randomUUID()
+            val filename = "$username-${photoId}"
+            viewModel.uploadImgToStorage(filename,uri)
+            val post = PostData(postOwner,postText,filename,date,postLat,postLan,username)
             viewModel.addPost(post)
             findNavController().navigate(R.id.action_addPostFragment_to_feedsFragment)
         }
 
+
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.addImgBtn.setOnClickListener{
+            showCamera()
+        }
+    }
+
+
+
+    override fun onStart() {
+        super.onStart()
+        Log.e(TAG,"frag on start && $cameraClicked")
+        if(cameraClicked){
+            binding.imageUri.setImageURI(uri)
+        }
+
+    }
+
+
+    private fun showCamera(){
+        SandriosCamera
+            .with()
+            .setShowPicker(true)
+            .setVideoFileSize(20)
+            .setMediaAction(CameraConfiguration.MEDIA_ACTION_BOTH)
+            .enableImageCropping(true)
+            .launchCamera(activity)
+    }
+
+
+
+    override fun onResultRecived(media: Media) {
+        cMedia = media
+        val path = media.path
+        cameraClicked = true
+        uri = Uri.fromFile(File(path))
+        Log.e(TAG,"img uri = $uri && $cameraClicked")
+    }
+
 
 }
 

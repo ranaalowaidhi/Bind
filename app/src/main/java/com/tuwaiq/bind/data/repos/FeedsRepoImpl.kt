@@ -2,13 +2,15 @@ package com.tuwaiq.bind.data.repos
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Location
+import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.Transformations.map
-import com.google.common.io.Files.map
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.tuwaiq.bind.data.remote.PostDataDto
 import com.tuwaiq.bind.domain.models.PostData
 import com.tuwaiq.bind.domain.repos.FeedsRepo
@@ -20,6 +22,8 @@ class FeedsRepoImpl @Inject constructor(
     private val context: Context) :FeedsRepo{
 
     private val postCollectionRef:CollectionReference = Firebase.firestore.collection("post")
+
+    private val storageRef = Firebase.storage.reference
 
     override suspend fun addPost(postData: PostData) {
         postCollectionRef.add(postData).await()
@@ -51,4 +55,17 @@ class FeedsRepoImpl @Inject constructor(
             it.toPostData()
         }
     }
+
+    override suspend fun uploadImgToStorage(filename:String,uri: Uri) {
+        storageRef.child("images/").child(filename).putFile(uri).await()
+    }
+
+    override suspend fun downloadImgFromStorage(filename: String):Bitmap {
+        val maxDownloadSize = 5L * 1024 * 1024
+        val bytes = storageRef.child("images/").child(filename).getBytes(maxDownloadSize)
+            .await()
+        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+        return bitmap
+    }
+
 }

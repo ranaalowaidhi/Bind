@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/bg_placeholder.xml" value="0.26256410256410256" />
         <entry key="app/src/main/res/drawable/add_img_shape.xml" value="0.25462962962962965" />
+        <entry key="app/src/main/res/drawable/bg_placeholder.xml" value="0.1484375" />
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.26256410256410256" />
         <entry key="app/src/main/res/drawable/card_bg.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.26256410256410256" />
@@ -22,6 +23,8 @@
         <entry key="app/src/main/res/layout/add_post_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/feed_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/feeds_fragment.xml" value="0.23645833333333333" />
+        <entry key="app/src/main/res/layout/fragment_capture_photo.xml" value="0.23645833333333333" />
+        <entry key="app/src/main/res/layout/fragment_capture_photo_a.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/fragment_results.xml" value="0.1" />
         <entry key="app/src/main/res/layout/login_fragment.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/map_fragment.xml" value="0.25052083333333336" />

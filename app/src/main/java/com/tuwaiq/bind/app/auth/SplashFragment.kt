@@ -6,13 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.tuwaiq.bind.R
 import com.tuwaiq.bind.databinding.SplashFragmentBinding
 
 class SplashFragment : Fragment() {
 
     private lateinit var binding:SplashFragmentBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if ( Firebase.auth.currentUser !=  null) {
+            findNavController().navigate(R.id.feedsFragment)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,5 +41,9 @@ class SplashFragment : Fragment() {
         }
         return binding.root
     }
+
+
+
+
 
 }
