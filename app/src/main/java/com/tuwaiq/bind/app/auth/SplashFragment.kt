@@ -20,9 +20,9 @@ class SplashFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if ( Firebase.auth.currentUser !=  null) {
-            findNavController().navigate(R.id.feedsFragment)
-        }
+//        if ( Firebase.auth.currentUser !=  null) {
+//            findNavController().navigate(R.id.feedsFragment)
+//        }
     }
 
     override fun onCreateView(

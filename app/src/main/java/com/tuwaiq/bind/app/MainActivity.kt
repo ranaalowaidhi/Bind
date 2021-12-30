@@ -22,10 +22,6 @@ import android.net.Uri
 import com.sandrios.sandriosCamera.internal.ui.model.Media
 import android.text.format.DateUtils
 
-
-
-
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 

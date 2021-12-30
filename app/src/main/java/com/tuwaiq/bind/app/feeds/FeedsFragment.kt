@@ -11,9 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.bind.R
@@ -22,6 +24,8 @@ import com.tuwaiq.bind.databinding.FeedItemBinding
 import com.tuwaiq.bind.databinding.FeedsFragmentBinding
 import com.tuwaiq.bind.domain.models.PostData
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import java.io.File
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -45,19 +49,23 @@ class FeedsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getLocation().observe(
-            this,{
-                userLocation = it
-                userLat = userLocation.latitude
-                userLon = userLocation.longitude
+        lifecycleScope.launchWhenCreated {
+            viewModel.getLocation().observe(
+                this@FeedsFragment,{
+                    userLocation = it
+                    userLat = userLocation.latitude
+                    userLon = userLocation.longitude
 
-                viewModel.getPost(userLat,userLon).observe(
-                    this, Observer { posts ->
-                        binding.postRv.adapter = PostsAdapter(posts)
+                    lifecycleScope.launch {
+                        viewModel.getPost(userLat,userLon).observe(
+                            this@FeedsFragment, Observer { posts ->
+                                binding.postRv.adapter = PostsAdapter(posts)
+                            }
+                        )
                     }
-                )
-            }
-        )
+                }
+            )
+        }
 
 
 
@@ -82,15 +90,9 @@ class FeedsFragment : Fragment() {
                 binding.postTimeTv.text = postDate
                 binding.postTv.text = post.postText
                 binding.usernameTv.text = post.userName
-                val filename = post.postPhoto
-                viewModel.downloadImgFromStorage(filename).observe(
-                    this@FeedsFragment,{
-                        bitmap = it
-                        binding.postImg.setImageBitmap(bitmap)
-                    }
-                )
-
-
+                Glide.with(this@FeedsFragment)
+                    .load(post.postPhoto)
+                    .into(binding.postImg)
             }
         }
 

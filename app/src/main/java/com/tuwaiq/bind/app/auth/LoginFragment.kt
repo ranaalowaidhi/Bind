@@ -25,20 +25,6 @@ class LoginFragment : Fragment() {
     private  val viewModel:AuthViewModel by viewModels()
     private lateinit var binding: LoginFragmentBinding
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-
-
-    }
-
-
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,15 +44,9 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
 
-
-
         return binding.root
 
     }
-
-
-
-
 
 }
 

@@ -16,6 +16,7 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -27,6 +28,7 @@ import com.tuwaiq.bind.app.MainActivity
 import com.tuwaiq.bind.databinding.AddPostFragmentBinding
 import com.tuwaiq.bind.domain.models.PostData
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.io.File
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -45,7 +47,7 @@ class AddPostFragment : Fragment() , MainActivity.CallBack{
     private lateinit var binding: AddPostFragmentBinding
     private lateinit var userLocation: Location
     lateinit var cMedia:Media
-    lateinit var postDate:String
+
 
 
 
@@ -53,13 +55,15 @@ class AddPostFragment : Fragment() , MainActivity.CallBack{
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getLocation().observe(
-            this,{
-                userLocation = it
-            }
-        )
-
+        lifecycleScope.launchWhenCreated {
+            viewModel.getLocation().observe(
+                this@AddPostFragment,{
+                    userLocation = it
+                }
+            )
+        }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,12 +80,19 @@ class AddPostFragment : Fragment() , MainActivity.CallBack{
             val username:String = "Rana Alowaidhi"
             val photoId:UUID = UUID.randomUUID()
             val filename = "$username-${photoId}"
-            viewModel.uploadImgToStorage(filename,uri)
-            val post = PostData(postOwner,postText,filename,date,postLat,postLan,username)
-            viewModel.addPost(post)
-            findNavController().navigate(R.id.action_addPostFragment_to_feedsFragment)
-        }
+            var postPhoto = ""
 
+                viewModel.uploadImgToStorage(filename, uri).observe(
+                    viewLifecycleOwner,{
+                        postPhoto = it
+                        val post = PostData(postOwner,postText, postPhoto,date,postLat,postLan,username)
+                        viewModel.addPost(post)
+                        findNavController().navigate(R.id.action_addPostFragment_to_feedsFragment)
+                    }
+                )
+
+
+        }
 
         return binding.root
     }

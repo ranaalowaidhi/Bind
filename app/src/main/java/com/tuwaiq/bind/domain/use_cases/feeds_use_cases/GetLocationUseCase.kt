@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetLocationUseCase @Inject constructor(
     private val repo:LocationRepo
 ) {
-    suspend operator fun invoke():Location = repo.getUserLocation()
+    suspend operator fun invoke(): LiveData<Location> = repo.getUserLocation()
 }

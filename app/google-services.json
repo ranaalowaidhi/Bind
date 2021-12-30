@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "161579873465",
-    "project_id": "bind-64b27",
-    "storage_bucket": "bind-64b27.appspot.com"
+    "project_number": "918534786014",
+    "project_id": "bestwishs-af86f",
+    "storage_bucket": "bestwishs-af86f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:161579873465:android:02278a85d5c659f79c9768",
+        "mobilesdk_app_id": "1:918534786014:android:f6d2b16b9bbd7fb887eb4f",
         "android_client_info": {
           "package_name": "com.tuwaiq.bind"
         }
       },
       "oauth_client": [
         {
-          "client_id": "161579873465-0ipqfbn0qpurohnsjpdh04d4srglobbe.apps.googleusercontent.com",
+          "client_id": "918534786014-7ldv906f3s4ooucat7jv3luh4qbq6662.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCax2axsFiVqABbXLg8doJd6AYEoyxiQik"
+          "current_key": "AIzaSyBFINgdoX862y2f_bF2qqvGePNq1bLeNMs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "161579873465-0ipqfbn0qpurohnsjpdh04d4srglobbe.apps.googleusercontent.com",
+              "client_id": "918534786014-7ldv906f3s4ooucat7jv3luh4qbq6662.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

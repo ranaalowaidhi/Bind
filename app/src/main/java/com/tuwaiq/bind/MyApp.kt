@@ -6,4 +6,8 @@ import dagger.hilt.android.HiltAndroidApp
 private const val TAG = "MyApp"
 @HiltAndroidApp
 class MyApp:Application(){
+    override fun onCreate() {
+        super.onCreate()
+
+    }
 }

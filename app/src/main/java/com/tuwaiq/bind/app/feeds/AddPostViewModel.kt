@@ -3,10 +3,7 @@ package com.tuwaiq.bind.app.feeds
 import android.location.Location
 import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.tuwaiq.bind.data.remote.PostDataDto
 import com.tuwaiq.bind.domain.models.PostData
 import com.tuwaiq.bind.domain.use_cases.feeds_use_cases.AddPostUseCase
@@ -31,23 +28,13 @@ class AddPostViewModel @Inject constructor(
         }
     }
 
-    fun uploadImgToStorage(filename:String,uri: Uri){
-        viewModelScope.launch(Dispatchers.IO) {
-            uploadImgToStorageUseCase(filename,uri)
-            Log.e(TAG,"uploading")
-        }
-    }
+    fun uploadImgToStorage(filename:String, uri: Uri):LiveData<String> =
+          uploadImgToStorageUseCase(filename, uri)
 
-    lateinit var userLocation:Location
-    fun getLocation(): LiveData<Location> {
-        val locationLiveData:MutableLiveData<Location> = MutableLiveData()
-        viewModelScope.launch {
-            userLocation = getLocationUseCase()
-        }.invokeOnCompletion {
-            viewModelScope.launch {
-                locationLiveData.value = userLocation
-            }
-        }
-        return locationLiveData
-    }
+
+
+    suspend fun getLocation(): LiveData<Location> =
+        getLocationUseCase()
+
+
 }

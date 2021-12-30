@@ -67,9 +67,7 @@
         <action
             android:id="@+id/action_addPostFragment_to_feedsFragment"
             app:destination="@id/feedsFragment" />
-        <action
-            android:id="@+id/action_addPostFragment_to_resultsFragment"
-            app:destination="@id/resultsFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
@@ -86,9 +84,5 @@
         android:name="com.tuwaiq.bind.app.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
-    <fragment
-        android:id="@+id/resultsFragment"
-        android:name="com.tuwaiq.bind.app.feeds.ResultsFragment"
-        android:label="fragment_results"
-        tools:layout="@layout/fragment_results" />
+
 </navigation>
