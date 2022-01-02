@@ -1,10 +1,8 @@
 package com.tuwaiq.bind.app.auth
 
 import androidx.lifecycle.ViewModel
-import com.tuwaiq.bind.data.repos.AuthRepoImp
-import com.tuwaiq.bind.domain.repos.AuthRepo
-import com.tuwaiq.bind.domain.use_cases.auth_use_cases.SignupUseCase
 import com.tuwaiq.bind.domain.use_cases.auth_use_cases.LoginUseCase
+import com.tuwaiq.bind.domain.use_cases.auth_use_cases.SignupUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

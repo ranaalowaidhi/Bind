@@ -21,10 +21,12 @@
         <entry key="app/src/main/res/layout/activity_fragment_sample.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/add_post_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/comment_item.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/feed_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/feeds_fragment.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/fragment_capture_photo.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/fragment_capture_photo_a.xml" value="0.23645833333333333" />
+        <entry key="app/src/main/res/layout/fragment_comments.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/fragment_results.xml" value="0.1" />
         <entry key="app/src/main/res/layout/login_fragment.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/map_fragment.xml" value="0.25052083333333336" />

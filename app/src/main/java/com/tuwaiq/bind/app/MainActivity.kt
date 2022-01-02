@@ -17,14 +17,18 @@ import android.widget.Toast
 
 import com.sandrios.sandriosCamera.internal.SandriosCamera
 
-import android.app.Activity
-import android.net.Uri
 import com.sandrios.sandriosCamera.internal.ui.model.Media
-import android.text.format.DateUtils
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private val rotateOpen:Animation by lazy { AnimationUtils.loadAnimation(this,R.anim.rotate_open_anim) }
+    private val rotateClose:Animation by lazy { AnimationUtils.loadAnimation(this,R.anim.rotate_close_anim) }
+    private val fromBottom:Animation by lazy { AnimationUtils.loadAnimation(this,R.anim.from_bottom_anim) }
+    private val toBottom:Animation by lazy { AnimationUtils.loadAnimation(this,R.anim.to_bottom_anim) }
 
     interface CallBack{
         fun onResultRecived(media: Media)
@@ -33,13 +37,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavBar:BottomNavigationView
     private lateinit var bottomAppBar:BottomAppBar
     private lateinit var fab: FloatingActionButton
+    private lateinit var textPostBtn: FloatingActionButton
+    private lateinit var mediaPostBtn: FloatingActionButton
+    private lateinit var voicePostBtn: FloatingActionButton
+
+    private var clicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         bottomNavBar = findViewById(R.id.bottomNavigationView)
         bottomAppBar = findViewById(R.id.bottomAppBar)
         fab = findViewById(R.id.fab)
+        textPostBtn = findViewById(R.id.textPostBtn)
+        mediaPostBtn = findViewById(R.id.mediaPostBtn)
+        voicePostBtn = findViewById(R.id.voicePostBtn)
+
         bottomNavBar.background = null
         bottomNavBar.menu.getItem(2).isEnabled = false
 
@@ -59,12 +73,72 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
+
         fab.setOnClickListener {
-            navController.navigate(R.id.addPostFragment)
+            onAddBtnClick()
         }
+        textPostBtn.setOnClickListener {
+            navController.navigate(R.id.addPostFragment)
+            onAddBtnClick()
+        }
+        mediaPostBtn.setOnClickListener {
+            navController.navigate(R.id.addPostFragment)
+            onAddBtnClick()
+        }
+        voicePostBtn.setOnClickListener {
+            navController.navigate(R.id.addPostFragment)
+            onAddBtnClick()
+        }
+
 
     }
 
+    private fun onAddBtnClick() {
+        setVisibility(clicked)
+        setAnimation(clicked)
+        setClickable(clicked)
+        clicked = !clicked
+    }
+
+    private fun setClickable(clicked: Boolean) {
+        if(!clicked){
+            textPostBtn.isClickable = true
+            mediaPostBtn.isClickable = true
+            voicePostBtn.isClickable = true
+        }else{
+            textPostBtn.isClickable = false
+            mediaPostBtn.isClickable = false
+            voicePostBtn.isClickable = false
+        }
+    }
+
+    private fun setAnimation(clicked:Boolean) {
+        if (!clicked){
+            textPostBtn.visibility = View.VISIBLE
+            mediaPostBtn.visibility = View.VISIBLE
+            voicePostBtn.visibility = View.VISIBLE
+        }else{
+            textPostBtn.visibility = View.INVISIBLE
+            mediaPostBtn.visibility = View.INVISIBLE
+            voicePostBtn.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setVisibility(clicked:Boolean) {
+        if (!clicked){
+            textPostBtn.startAnimation(fromBottom)
+            mediaPostBtn.startAnimation(fromBottom)
+            voicePostBtn.startAnimation(fromBottom)
+            fab.startAnimation(rotateOpen)
+        }else{
+            textPostBtn.startAnimation(toBottom)
+            mediaPostBtn.startAnimation(toBottom)
+            voicePostBtn.startAnimation(toBottom)
+            fab.startAnimation(rotateClose)
+        }
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -77,9 +151,5 @@ class MainActivity : AppCompatActivity() {
                 (AddPostFragment() as CallBack ).onResultRecived(media)
             }
         }
-
     }
-
-
-
 }

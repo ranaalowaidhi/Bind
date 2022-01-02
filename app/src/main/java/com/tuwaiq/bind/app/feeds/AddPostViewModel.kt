@@ -5,7 +5,9 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
 import com.tuwaiq.bind.data.remote.PostDataDto
+import com.tuwaiq.bind.domain.models.PostComment
 import com.tuwaiq.bind.domain.models.PostData
+import com.tuwaiq.bind.domain.use_cases.feeds_use_cases.AddCommentUseCase
 import com.tuwaiq.bind.domain.use_cases.feeds_use_cases.AddPostUseCase
 import com.tuwaiq.bind.domain.use_cases.feeds_use_cases.GetLocationUseCase
 import com.tuwaiq.bind.domain.use_cases.feeds_use_cases.UploadImgToStorageUseCase
@@ -19,7 +21,7 @@ private const val TAG = "AddPostViewModel"
 class AddPostViewModel @Inject constructor(
     private val addPostUseCase: AddPostUseCase,
     private val getLocationUseCase: GetLocationUseCase,
-    private val uploadImgToStorageUseCase:UploadImgToStorageUseCase
+    private val uploadImgToStorageUseCase:UploadImgToStorageUseCase,
 ):ViewModel(){
 
     fun addPost(postData: PostData){

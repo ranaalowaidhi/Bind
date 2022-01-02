@@ -45,4 +45,51 @@
         app:backgroundTint="@color/blue_700"
         app:layout_anchor="@id/bottomAppBar" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchorGravity="center"
+        android:paddingBottom="80sp"
+        app:layout_anchor="@id/bottomAppBar" >
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/textPostBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_text_post"
+            app:backgroundTint="@color/blue_700"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/mediaPostBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/mediaPostBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_camera"
+            app:backgroundTint="@color/blue_700"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/voicePostBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_voice_post"
+            app:backgroundTint="@color/blue_700"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/mediaPostBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

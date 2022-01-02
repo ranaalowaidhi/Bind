@@ -2,13 +2,13 @@ package com.tuwaiq.bind.app.feeds
 
 import android.graphics.Bitmap
 import android.location.Location
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -19,15 +19,13 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.bind.R
-import com.tuwaiq.bind.data.remote.PostDataDto
+import com.tuwaiq.bind.commen.utils.hideKeyboard
 import com.tuwaiq.bind.databinding.FeedItemBinding
 import com.tuwaiq.bind.databinding.FeedsFragmentBinding
+import com.tuwaiq.bind.domain.models.PostComment
 import com.tuwaiq.bind.domain.models.PostData
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.io.File
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -45,7 +43,7 @@ class FeedsFragment : Fragment() {
     var userLon:Double =0.0
     private lateinit var userLocation: Location
     private lateinit var bitmap: Bitmap
-    var gotBitmap = false
+    var commentAdded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +80,6 @@ class FeedsFragment : Fragment() {
 
     private inner class PostsHolder(val binding:FeedItemBinding):
         RecyclerView.ViewHolder(binding.root){
-
             fun bind(post: PostData){
                 val dateStr = post.postTime
                 val dateTime = Date.parse(dateStr)
@@ -93,6 +90,68 @@ class FeedsFragment : Fragment() {
                 Glide.with(this@FeedsFragment)
                     .load(post.postPhoto)
                     .into(binding.postImg)
+
+                binding.commentEt.setOnClickListener {
+                    binding.commentEt.isFocusable = true
+                    binding.commentEt.isFocusableInTouchMode = true
+                }
+
+
+                binding.commentEt.addTextChangedListener(object :TextWatcher{
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+
+                        if (count == 0){
+                            binding.postCommentBtn.visibility = View.INVISIBLE
+                        }
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+
+                        if (count == 0){
+                            binding.postCommentBtn.visibility = View.INVISIBLE
+                        }
+                        binding.postCommentBtn.visibility = View.VISIBLE
+                        binding.postCommentBtn.setOnClickListener {
+                            val commentTime = Date().toString()
+                            val commentOwner = Firebase.auth.currentUser?.uid.toString()
+                            val postId = post.postId
+                            val postComment =
+                                PostComment(s.toString(), commentTime, commentOwner, postId)
+                            viewModel.addComment(postComment)
+                            val fragment = this@FeedsFragment
+                            fragment.hideKeyboard()
+                            binding.commentEt.text.clear()
+                            binding.commentEt.isFocusable = false
+                            binding.commentEt.isFocusableInTouchMode = false
+                            binding.postCommentBtn.visibility = View.INVISIBLE
+                            commentAdded = true
+                        }
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+
+                        if (s.isNullOrBlank()){
+                            binding.postCommentBtn.visibility = View.INVISIBLE
+                        }
+                    }
+
+                })
+
+                binding.commentsNum.setOnClickListener {
+                    val action = FeedsFragmentDirections.actionFeedsFragmentToCommentsFragment(post.postId)
+                    findNavController().navigate(action)
+                }
+
             }
         }
 
@@ -104,6 +163,7 @@ class FeedsFragment : Fragment() {
                 parent,
                 false
             )
+            binding.postCommentBtn.visibility = View.INVISIBLE
             return PostsHolder(binding)
         }
 

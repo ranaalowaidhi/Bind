@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.tuwaiq.bind.R
@@ -20,9 +19,9 @@ class SplashFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        if ( Firebase.auth.currentUser !=  null) {
-//            findNavController().navigate(R.id.feedsFragment)
-//        }
+        if ( Firebase.auth.currentUser !=  null) {
+            findNavController().navigate(R.id.feedsFragment)
+        }
     }
 
     override fun onCreateView(

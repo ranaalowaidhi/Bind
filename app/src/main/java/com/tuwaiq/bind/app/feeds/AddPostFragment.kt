@@ -2,18 +2,13 @@ package com.tuwaiq.bind.app.feeds
 
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.location.Location
 import android.net.Uri
-import android.nfc.Tag
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -28,12 +23,8 @@ import com.tuwaiq.bind.app.MainActivity
 import com.tuwaiq.bind.databinding.AddPostFragmentBinding
 import com.tuwaiq.bind.domain.models.PostData
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.io.File
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.log
 
 lateinit var uri:Uri
 var cameraClicked = false
@@ -41,16 +32,10 @@ private const val TAG = "AddPostFragment"
 @AndroidEntryPoint
 class AddPostFragment : Fragment() , MainActivity.CallBack{
 
-
-
     private  val viewModel: AddPostViewModel by viewModels()
     private lateinit var binding: AddPostFragmentBinding
     private lateinit var userLocation: Location
     lateinit var cMedia:Media
-
-
-
-
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +49,6 @@ class AddPostFragment : Fragment() , MainActivity.CallBack{
         }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,21 +61,18 @@ class AddPostFragment : Fragment() , MainActivity.CallBack{
             val postLan = userLocation.longitude.toString()
             val postOwner = Firebase.auth.currentUser?.uid.toString()
             val postText = binding.postTv.text.toString()
-            val username:String = "Rana Alowaidhi"
+            val username:String = Firebase.auth.currentUser?.displayName.toString()
             val photoId:UUID = UUID.randomUUID()
-            val filename = "$username-${photoId}"
+            val postId = "$username-${photoId}"
             var postPhoto = ""
-
-                viewModel.uploadImgToStorage(filename, uri).observe(
+            viewModel.uploadImgToStorage(postId, uri).observe(
                     viewLifecycleOwner,{
                         postPhoto = it
-                        val post = PostData(postOwner,postText, postPhoto,date,postLat,postLan,username)
+                        val post = PostData(postOwner,postText, postPhoto,date,postLat,postLan,username,postId)
                         viewModel.addPost(post)
                         findNavController().navigate(R.id.action_addPostFragment_to_feedsFragment)
                     }
                 )
-
-
         }
 
         return binding.root
@@ -104,8 +85,6 @@ class AddPostFragment : Fragment() , MainActivity.CallBack{
         }
     }
 
-
-
     override fun onStart() {
         super.onStart()
         Log.e(TAG,"frag on start && $cameraClicked")
@@ -114,7 +93,6 @@ class AddPostFragment : Fragment() , MainActivity.CallBack{
         }
 
     }
-
 
     private fun showCamera(){
         SandriosCamera
@@ -126,8 +104,6 @@ class AddPostFragment : Fragment() , MainActivity.CallBack{
             .launchCamera(activity)
     }
 
-
-
     override fun onResultRecived(media: Media) {
         cMedia = media
         val path = media.path
@@ -135,8 +111,6 @@ class AddPostFragment : Fragment() , MainActivity.CallBack{
         uri = Uri.fromFile(File(path))
         Log.e(TAG,"img uri = $uri && $cameraClicked")
     }
-
-
 }
 
 

@@ -1,6 +1,5 @@
 package com.tuwaiq.bind.domain.use_cases.feeds_use_cases
 
-import com.tuwaiq.bind.data.remote.PostDataDto
 import com.tuwaiq.bind.domain.models.PostData
 import com.tuwaiq.bind.domain.repos.FeedsRepo
 import javax.inject.Inject

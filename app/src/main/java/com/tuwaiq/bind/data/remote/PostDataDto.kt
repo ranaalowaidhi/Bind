@@ -1,6 +1,5 @@
 package com.tuwaiq.bind.data.remote
 
-import android.net.Uri
 import com.tuwaiq.bind.domain.models.PostData
 
 data class PostDataDto(
@@ -10,9 +9,9 @@ data class PostDataDto(
     var postTime:String ="",
     var postLat:String = "",
     var postLan:String = "",
-    var userName:String = ""
+    var userName:String = "",
+    val postId:String = ""
 ){
-
     fun toPostData():PostData{
         return PostData(
             postOwner = postOwner,
@@ -21,8 +20,8 @@ data class PostDataDto(
             postTime = postTime,
             postLat = postLat,
             postLan = postLan,
-            userName = userName
+            userName = userName,
+            postId = postId
         )
     }
-
 }

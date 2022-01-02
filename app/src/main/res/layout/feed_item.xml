@@ -71,6 +71,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postImg">
 
+
+
         <TextView
             android:id="@+id/postTv"
             android:layout_width="match_parent"
@@ -96,50 +98,53 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/postTv" />
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/weatherCard"
-            android:layout_width="80sp"
-            android:layout_height="35sp"
-            android:layout_marginTop="10sp"
-            android:background="@drawable/button_shape"
-            android:backgroundTint="@color/yellow_700"
+        <TextView
+            android:id="@+id/commentsNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2sp"
+            android:fontFamily="@font/poppins"
+            android:text="view all 4 comments"
+            android:textColor="@color/gray_400"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/commentEt"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view">
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
-            <ImageView
-                android:id="@+id/weatherIc"
-                android:layout_width="22sp"
-                android:layout_height="22sp"
-                android:layout_marginStart="10sp"
-                android:src="@drawable/ic_sunny"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/commentEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/poppins"
+            android:textColorHint="@color/gray_400"
+            android:textSize="14sp"
+            android:hint="@string/add_comment"
+            app:layout_constraintTop_toBottomOf="@+id/likeBtn"/>
 
-            <TextView
-                android:id="@+id/weatherTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10sp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="34°"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/weatherIc"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/postCommentBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5sp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/post"
+            android:textColor="@color/blue_700"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/commentEt"
+            app:layout_constraintTop_toBottomOf="@+id/commentEt" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/likeBtn"
             android:layout_width="30sp"
             android:layout_height="30sp"
             android:src="@drawable/ic_love0"
-            app:layout_constraintBottom_toBottomOf="@+id/weatherCard"
+            android:layout_marginTop="8sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/weatherCard"
+            app:layout_constraintTop_toTopOf="@id/view"
             app:layout_constraintVertical_bias="0.0" />
 
 

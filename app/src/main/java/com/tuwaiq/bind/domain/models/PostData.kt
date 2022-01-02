@@ -1,7 +1,5 @@
 package com.tuwaiq.bind.domain.models
 
-import android.net.Uri
-
 data class PostData(
     var postOwner:String = "",
     var postText:String = "",
@@ -9,5 +7,6 @@ data class PostData(
     var postTime:String ="",
     var postLat:String = "",
     var postLan:String = "",
-    var userName:String = ""
+    var userName:String = "",
+    val postId:String = ""
 )

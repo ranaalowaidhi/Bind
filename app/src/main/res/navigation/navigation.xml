@@ -58,6 +58,9 @@
         <action
             android:id="@+id/action_feedsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_feedsFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
@@ -84,5 +87,15 @@
         android:name="com.tuwaiq.bind.app.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.tuwaiq.bind.app.feeds.CommentsFragment"
+        android:label="fragment_comments"
+        tools:layout="@layout/fragment_comments" >
+        <argument
+            android:name="postId"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
 
 </navigation>

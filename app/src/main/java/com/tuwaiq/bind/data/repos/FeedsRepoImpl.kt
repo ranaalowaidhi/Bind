@@ -12,6 +12,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.tuwaiq.bind.data.remote.PostDataDto
+import com.tuwaiq.bind.domain.models.PostComment
 import com.tuwaiq.bind.domain.models.PostData
 import com.tuwaiq.bind.domain.repos.FeedsRepo
 import kotlinx.coroutines.Dispatchers
@@ -23,16 +24,33 @@ class FeedsRepoImpl @Inject constructor(
     private val context: Context) :FeedsRepo{
 
     private val postCollectionRef:CollectionReference = Firebase.firestore.collection("post")
+    private val commentCollectionRef:CollectionReference = Firebase.firestore.collection("comments")
     private val storageRef = Firebase.storage.reference
 
     override suspend fun addPost(postData: PostData) {
         postCollectionRef.add(postData).await()
     }
 
+    override suspend fun addComment(postComment: PostComment) {
+        commentCollectionRef.add(postComment)
+    }
+
+    override suspend fun getComments(postId: String): LiveData<List<PostComment>> {
+        return liveData{
+            val postCommentsList: MutableList<PostComment> = mutableListOf()
+            val snapshot = commentCollectionRef.whereEqualTo("postId",postId).get().await()
+            for (document in snapshot){
+                val postComment = document.toObject(PostComment::class.java)
+                postCommentsList += postComment
+            }
+            emit(postCommentsList)
+        }
+    }
+
     @SuppressLint("MissingPermission")
     override suspend fun getPost(userLat:Double,userLon:Double) : LiveData<List<PostData>> {
         return liveData{
-            val postDataList: MutableList<PostDataDto> = mutableListOf()
+            val postDataList: MutableList<PostData> = mutableListOf()
             val snapshot = postCollectionRef.get().await()
             for (document in snapshot) {
                 val postLat: Double = document["postLat"].toString().toDouble()
@@ -45,26 +63,21 @@ class FeedsRepoImpl @Inject constructor(
                 val distance = results[0]
                 Log.d(TAG,"$distance")
                 if (distance <= 5000.0f) {
-                    val postData = document.toObject(PostDataDto::class.java)
+                    val postData = document.toObject(PostData::class.java)
                     postDataList += postData
                     Log.d(TAG, "getPost: $postData")
                 }else{
                     Log.d(TAG, "getPost: Nothing to show")
                 }
             }
-
-            val postList = postDataList.map {
-                it.toPostData()
-            }
-            emit(postList)
+            emit(postDataList)
         }
     }
 
-    override  fun uploadImgToStorage(filename: String, uri: Uri):LiveData<String>{
+    override fun uploadImgToStorage(filename: String, uri: Uri):LiveData<String>{
        return liveData(Dispatchers.IO) {
            val ref = storageRef.child("images/").child(filename)
            val uploadTask = ref.putFile(uri)
-
            val urlTask = uploadTask.continueWithTask { task ->
                if (!task.isSuccessful) {
                    task.exception?.let {
@@ -75,17 +88,8 @@ class FeedsRepoImpl @Inject constructor(
            }.await()
            emit(urlTask.toString())
        }
-
-
-
-
     }
 
-//    override suspend fun getImgFromStorage(filename: String):String{
-//            val url = storageRef.child("images/").child(filename).downloadUrl.addOnSuccessListener {
-//
-//            }
-//            return url.toString()
-//        }
+
 
 }
